@@ -1,0 +1,29 @@
+{
+  "name": "webtutorial-yelpcampinspired",
+  "version": "1.0.0",
+  "description": "適当なLLMを持ってきてLLMと会話するwebサイトを作る(webサイトを作る練習)。\r 使おうとしている技術としては\r js、node.js、express、HTML/CSS、BootStrap、mongodb、mongooseあたり。\r LLMはAPIではなくローカルに落として使うこととする。\r OllamaでELYZA-japanese-Llama-2-7bを動かす？\r Ollamaの公式モデル一覧には「ELYZA-japanese-Llama-2-7b」は含まれていないためgguf形式を用意してOllamaにインポート？",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nisizawa-takumi/WebTutorial-YelpCampInspired.git"
+  },
+  "author": "Takumi Nisizawa",
+  "bugs": {
+    "url": "https://github.com/nisizawa-takumi/WebTutorial-YelpCampInspired/issues"
+  },
+  "homepage": "https://github.com/nisizawa-takumi/WebTutorial-YelpCampInspired#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
