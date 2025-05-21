@@ -68,6 +68,11 @@ app.get("/conversations/:id", async (req, res) => {
   }
 });
 
+app.get("/users", async (req, res) => {
+  const users = await User.find({});
+  res.render("users/index", { users });
+});
+
 app.listen(3000, () => {
   console.log("サーバーがリクエストを受け付け始めました");
 });
