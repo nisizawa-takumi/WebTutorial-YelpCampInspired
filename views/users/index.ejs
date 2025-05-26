@@ -1,39 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ユーザー一覧</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="bg-light">
-    <%- include("../../modules/navbar.ejs") %>
-    <div class="container min-vh-100 py-4">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6 mx-auto">
-          <h1 class="mb-4 text-primary text-center">ユーザー一覧</h1>
-          <ul class="list-group">
-            <% for (const user of users) { %>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span class="fw-bold text-success"><%= user.username %></span>
-              <span class="text-muted small"
-                >作成日: <%= user.createdAt %></span
-              >
-            </li>
-            <% } %>
-          </ul>
-          <a href="/" class="btn btn-outline-secondary mt-4">ホームに戻る</a>
-        </div>
-      </div>
+<% layout('../layouts/boilerplate') %> <% block('title', 'ユーザー一覧') %>
+<div class="container min-vh-100 py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+      <h1 class="mb-4 text-primary text-center">ユーザー一覧</h1>
+      <ul class="list-group">
+        <% for (const user of users) { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="fw-bold text-success"><%= user.username %></span>
+          <span class="text-muted small">作成日: <%= user.createdAt %></span>
+        </li>
+        <% } %>
+      </ul>
+      <a href="/" class="btn btn-outline-secondary mt-4">ホームに戻る</a>
     </div>
-    <!-- BootStrap JS（必要なら） -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+  </div>
+</div>

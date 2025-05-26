@@ -1,67 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>会話表示（後々実行もしたい）</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="bg-light">
-    <%- include("../../modules/navbar.ejs") %>
-    <div class="container min-vh-100 py-4">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8 mx-auto">
-          <div class="card shadow-sm mb-4">
-            <div class="card-body">
-              <h2 class="card-title text-primary mb-3">
-                会話
-                <small class="text-muted fs-6"
-                  >（<%= conversation.createdAt %> 作成）</small
-                >
-              </h2>
-              <div class="mb-3">
-                <span class="fw-bold">参加者:</span>
-                <% conversation.participants.forEach(function(user) { %>
-                <span class="badge bg-success me-1"><%= user.username %></span>
-                <% }); %>
-              </div>
-              <ul class="list-group">
-                <% conversation.messages.forEach(function(message) { %>
-                <li class="list-group-item">
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div>
-                      <strong class="text-primary"
-                        ><%= message.sender.username %>:</strong
-                      >
-                      <span><%= message.content %></span>
-                    </div>
-                    <small class="text-muted ms-2">
-                      (<%= message.sentAt.toLocaleString ?
-                      message.sentAt.toLocaleString() : message.sentAt %>)
-                    </small>
-                  </div>
-                </li>
-                <% }); %>
-              </ul>
-            </div>
+<% layout('../layouts/boilerplate') %>
+<div class="container min-vh-100 py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="card-title text-primary mb-3">
+            チャット
+            <br />
+            <small class="text-muted fs-6">
+              - <%= conversation.createdAt %> 作成 (chat id: <%= conversation._id %>)
+            </small>
+          </h2>
+          <div class="mb-3">
+            <span class="fw-bold">参加者:</span>
+            <% conversation.participants.forEach(function(user) { %>
+            <span class="badge bg-success me-1"><%= user.username %></span>
+            <% }); %>
           </div>
-          <a href="/conversations" class="btn btn-outline-secondary"
-            >一覧に戻る</a
-          >
+          <ul class="list-group">
+            <% conversation.messages.forEach(function(message) { %>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <strong class="text-primary"><%= message.sender.username %>:</strong>
+                  <span><%= message.content %></span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <small class="text-muted ms-2">
+                    (<%= message.sentAt.toLocaleString ? message.sentAt.toLocaleString() : message.sentAt %>)
+                  </small>
+                  <a
+                    href="/conversations/<%= conversation._id %>/messages/<%= message._id %>"
+                    class="btn btn-sm btn-outline-secondary ms-2"
+                  >
+                    編集
+                  </a>
+                </div>
+              </div>
+            </li>
+            <% }); %>
+          </ul>
         </div>
       </div>
+      <form action="/conversations/<%= conversation._id %>" method="POST" class="mb-4">
+        <div class="mb-3">
+          <label for="messageContent" class="form-label">新しいメッセージ</label>
+          <textarea class="form-control" id="messageContent" name="content" rows="2" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-auto">送信</button>
+      </form>
+      <a href="/conversations" class="btn btn-outline-secondary w-auto">一覧に戻る</a>
     </div>
-    <!-- BootStrap JS（必要なら） -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+  </div>
+</div>
 <!--会話のデータ型メモ
 { 
 _id: new ObjectId('682d7e78229f34de6d5aa940'), 

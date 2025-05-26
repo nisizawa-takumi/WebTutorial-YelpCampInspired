@@ -1,0 +1,29 @@
+<% layout('../layouts/boilerplate') %>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="mb-4">メッセージ</h1>
+    </div>
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form
+        action="/conversations/<%= conversation._id %>/messages/<%= message._id %>?_method=PATCH"
+        method="POST"
+        class="mb-3"
+      >
+        <div class="mb-3">
+          <label for="message" class="form-label">メッセージ内容:</label>
+          <textarea id="message" name="updatedMessage" rows="4" class="form-control"><%= message.content %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">更新</button>
+        <a href="/conversations/<%= conversation._id %>" class="btn btn-secondary ms-2">キャンセル</a>
+      </form>
+      <form action="/conversations/<%= conversation._id %>/messages/<%= message._id %>?_method=DELETE" method="POST">
+        <button type="submit" onclick="return confirm('本当に削除しますか？');" class="btn btn-danger">削除</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% layout('../layouts/boilerplate') %>
+
+<div class="container mt-5">
+  <h1 class="display-5 text-info">エラー: <%= status %></h1>
+  <p class="lead">
+    お探しのページが存在しないか、移動した可能性があります。または、エラーが発生した可能性があります。
+    <br />
+    詳しくは、以下のエラーメッセージを参照してください。
+  </p>
+  <% if (typeof message !== 'undefined' && message) { %>
+  <div class="alert alert-warning mt-3">
+    エラーメッセージ:
+    <br />
+    <%= message %>
+  </div>
+  <% } %>
+  <a href="/" class="btn btn-primary mt-3">ホームに戻る</a>
+</div>

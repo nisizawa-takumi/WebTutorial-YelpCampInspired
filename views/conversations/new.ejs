@@ -1,0 +1,16 @@
+<% layout('../layouts/boilerplate') %>
+<h1 class="mb-4">新しい会話を作成</h1>
+<form action="/conversations" method="POST" class="container" style="max-width: 500px">
+  <div class="mb-3">
+    <label for="participants" class="form-label">参加者のユーザーID（カンマ区切り）:</label>
+    <input type="text" id="participants" name="participants" class="form-control" required />
+  </div>
+  <div class="mb-3">
+    <label for="message" class="form-label">最初のメッセージ:</label>
+    <textarea id="message" name="message" class="form-control" rows="3" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">作成</button>
+</form>
+<!--
+
+-->
