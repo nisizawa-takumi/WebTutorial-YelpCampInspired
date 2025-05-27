@@ -18,7 +18,7 @@
           <label for="message" class="form-label">メッセージ内容:</label>
           <textarea id="message" name="updatedMessage" rows="4" class="form-control"><%= message.content %></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">更新</button>
+        <button type="submit" onclick="return confirm('編集を確定しますか？');" class="btn btn-primary">編集</button>
         <a href="/conversations/<%= conversation._id %>" class="btn btn-secondary ms-2">キャンセル</a>
       </form>
       <form action="/conversations/<%= conversation._id %>/messages/<%= message._id %>?_method=DELETE" method="POST">
