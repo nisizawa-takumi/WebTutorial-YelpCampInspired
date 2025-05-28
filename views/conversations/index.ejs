@@ -3,6 +3,9 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8 mx-auto">
       <h1 class="mb-4 text-primary text-center">会話一覧</h1>
+      <div class="mb-4 text-center">
+        <a href="/conversations/new" class="btn btn-success">新しい会話を作成</a>
+      </div>
       <div class="row row-cols-1 row-cols-md-2 g-4">
         <% for (const conv of convs) { %>
         <div class="col">
@@ -16,10 +19,12 @@
                   <% } %>
                 </div>
               </h5>
-              <p class="card-text mb-1">
-                <span class="fw-bold text-danger"><%= conv.messages[0].sender.username %> さん</span>
-                <span class="text-primary">- <%= conv.messages[0].content %></span>
-              </p>
+              <% if (conv.messages.length > 0 && conv.messages[0].sender && conv.messages[0].sender.username) { %>
+              <span class="fw-bold text-danger"><%= conv.messages[0].sender.username %> さん</span>
+              <span class="text-primary">- <%= conv.messages[0].content %></span>
+              <% } else { %>
+              <span class="text-muted">メッセージなし</span>
+              <% } %>
               <p class="card-text">
                 <small class="text-info">作成日時: <%= conv.createdAt %></small>
               </p>

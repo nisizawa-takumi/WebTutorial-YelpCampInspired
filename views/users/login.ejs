@@ -1,0 +1,22 @@
+<% layout('../layouts/boilerplate') %>
+<div class="container min-vh-100 py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+      <h1 class="mb-4 text-primary text-center">ログイン</h1>
+      <form action="/login" method="POST" class="card p-4 shadow-sm">
+        <div class="mb-3">
+          <label for="username" class="form-label">ユーザー名</label>
+          <input type="text" class="form-control" id="username" name="username" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">パスワード</label>
+          <input type="password" class="form-control" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">ログイン</button>
+      </form>
+      <div class="text-center mt-3">
+        <a href="/register">アカウントを作成する</a>
+      </div>
+    </div>
+  </div>
+</div>

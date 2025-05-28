@@ -1,24 +1,25 @@
 <% layout('../layouts/boilerplate') %>
 <div class="container min-vh-100 py-4">
-  <% if (success && success.length > 0) { %>
-  <div
-    class="flash-message alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow"
-    style="z-index: 1055; min-width: 300px"
-  >
-    <%= success %>
-  </div>
-  <% } %>
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8 mx-auto">
       <div class="card shadow-sm mb-4">
         <div class="card-body">
-          <h2 class="card-title text-primary mb-3">
-            チャット
-            <br />
-            <small class="text-muted fs-6">
-              - <%= conversation.createdAt %> 作成 (chat id: <%= conversation._id %>)
-            </small>
-          </h2>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="card-title text-primary mb-0">チャット</h2>
+            <% if (currentUser && conversation.participants.some(u => u._id.equals(currentUser._id))) { %>
+            <form
+              action="/conversations/<%= conversation._id %>?_method=DELETE"
+              method="POST"
+              onsubmit="return confirm('本当にこのチャットを削除しますか？');"
+              class="m-0"
+            >
+              <button type="submit" class="btn btn-danger w-auto">チャット削除</button>
+            </form>
+            <% } else { %>
+            <small class="text-muted ms-2">(チャットを削除するには、参加者としてログインする必要があります)</small>
+            <% } %>
+          </div>
+          <small class="text-muted fs-6">- <%= conversation.createdAt %> 作成 (chat id: <%= conversation._id %>)</small>
           <div class="mb-3">
             <span class="fw-bold">参加者:</span>
             <% conversation.participants.forEach(function(user) { %>

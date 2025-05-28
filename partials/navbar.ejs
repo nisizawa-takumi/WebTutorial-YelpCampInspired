@@ -20,6 +20,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <% if (!currentUser) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">ユーザ登録</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">ログイン</a>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <span class="nav-link text-white me-2">
+            <i class="bi bi-person-circle"></i>
+            <%= currentUser.username %> さん
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout" onclick="return confirm('本当にログアウトしますか？');">ログアウト</a>
+        </li>
+        <% } %>
         <li class="nav-item">
           <a class="nav-link" href="/conversations">会話一覧</a>
         </li>

@@ -7,6 +7,11 @@ import ejsMate from "ejs-mate";
 import httpErrors from "http-errors";
 import session from "express-session";
 import flash from "connect-flash";
+import passport from "passport";
+import passportLocal from "passport-local";
+import cors from "cors";
+
+import User from "./models/user.js";
 
 import conversationRoutes from "./routes/conversations.js";
 import userRoutes from "./routes/users.js";
@@ -42,6 +47,12 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  cors({
+    origin: "https://hoppscotch.io", // 許可したいオリジンだけ指定
+    credentials: true, // セッションやCookieを使う場合は必要
+  })
+); //TODO: 本番ではコメントアウトする（セキュリティのため）
 
 const sessionConfig = {
   secret: "temp", //TODO: 後でセキュリティ上安全なようにする、本当は直書きしてはいけないらしい
@@ -53,9 +64,18 @@ const sessionConfig = {
   },
 };
 app.use(session(sessionConfig));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(flash());
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 
